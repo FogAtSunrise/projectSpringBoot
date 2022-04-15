@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en" class="h-100">
+<head>
+    <div th:replace="fragments :: head-data">&nbsp;</div>
+    <title>Главная страница</title>
+</head>
+
+<div th:replace="fragments :: header"/>
+<body class="d-flex flex-column h-100">
+<main class="container col-md-10" id="content">
+    <div class=" row justify-content-center p-e-5 ">
+        <!--/*@thymesVar id="prod" type="com.prompo.knit.model.Product"*/-->
+        <div class=" col-6 col-md-5 col-lg-4 col-xl-3 card-container" th:each="prod: ${products}">
+            <div class="card" th:object="${prod}">
+                <a th:href="@{'/product/' + *{id}}" class="stretched-link"></a>
+                <div class="image-container ">
+                    <div class="square-image card-img-top "
+                         th:style="'background-image: url(\'' + *{image} + '\');'">
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p class="card-subtitle" th:text="*{name}"/>
+                    <div class="row justify-content-between ">
+                        <h5 class="col card-title" th:text="*{price} + ' ₽'"/>
+                        <h5 class="col card-title" th:text="'Размер '+*{size}"></h5>
+                        <img class="col-auto" th:src="@{/img/heart.png}" width="25" height="25" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<div th:replace="fragments :: footer"/>
+</body>
+</html>

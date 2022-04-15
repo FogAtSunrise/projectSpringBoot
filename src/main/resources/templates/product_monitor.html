@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="ru" class="h-100">
+<head>
+    <div th:replace="fragments :: head-data">&nbsp;</div>
+    <title>Главная страница</title>
+</head>
+
+<div th:replace="fragments :: header"/>
+<body class="d-flex flex-column h-100">
+<main class="container col-md-10" id="content">
+    <div class=" row justify-content-center p-e-5 ">
+        <div class=" row justify-content-center p-e-5 ">
+            <div class=" col-6 col-md-5 col-lg-4 col-xl-3 card-container">
+                <div class="card-edit">
+                    <a th:href="${'/create'}" class="stretched-link"></a>
+                    <img class="card-img-top mb-0" style=" transform: scale(0.35);" th:src="@{/img/plus_black.png}" alt="+">
+                    <h5 class="col card-title text-center">Добавить товар</h5>
+                </div>
+            </div>
+        <!--/*@thymesVar id="prod" type="com.prompo.knit.model.Product"*/-->
+        <div class=" col-6 col-md-5 col-lg-4 col-xl-3 card-container" th:each="prod: ${products}">
+            <div class="card-edit" th:object="${prod}">
+                <div class="image-container">
+                    <a th:href="@{'/product/' + ${prod.id}}" class="stretched-link"></a>
+                    <div class="square-image card-img-top"
+                         th:style="'background-image: url(\'' + *{image} + '\');'">
+                    </div>
+                </div>
+                <div class="card-body">
+                    <p class="card-subtitle" th:text="*{name}"></p>
+                    <h5 class="col card-title" th:text="*{price} + ' ₽'"></h5>
+                    <h5 class="col card-title" th:text="'Размер '+*{size}"></h5>
+                    <hr style="margin-bottom:0;">
+                    <div class=" row justify-content-center p-2 ">
+                        <a th:href="@{'/edit/' + *{id}}" class="col-5 btn btn-outline-primary border-0 m-1">
+                            <img class="col-auto" th:src="@{/img/edit.png}" width="25" height="25" alt=""></a>
+                        <a th:href="@{'/delete/' + *{id}}" class="col-5 btn btn-outline-danger border-0 m-1">
+                            <img class="col-auto" th:src="@{/img/delete.png}" width="25" height="25" alt=""></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<div th:replace="fragments :: footer"/>
+</body>
+</html>
