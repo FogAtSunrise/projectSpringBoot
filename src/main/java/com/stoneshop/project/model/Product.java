@@ -26,19 +26,17 @@ public class Product {
     private String description;
     @Column
     private String size;
-   // @Column
-   // private boolean isMadeToOrder;
 
     @Column(nullable = true)
     private String image = "def.png";
-    @ManyToOne(optional = false)
-    private Seller seller;
+    @ManyToOne()
+    private Category category;
 
-    public Seller getSeller() {
-        return seller;
+    public Category getCategory() {
+        return category;
     }
 
-    public void setSeller(Seller seller) {
-        this.seller = seller;
+    public void setCategory(Category category) {
+        this.category = category;
     }
 }

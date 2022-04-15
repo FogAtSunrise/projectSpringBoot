@@ -7,20 +7,19 @@ import java.util.List;
 
 @Entity
 @Data
-@Table(name = "seller")
+@Table(name = "category")
 /***
  * Класс JPA-сущности для таблицы продавцов
  */
-public class Seller {
+public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Long id;
     @Column
-    private String firstName;
-    @Column
-    private String lastName;
-    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "seller")
+    private String name;
+
+    @OneToMany(cascade = CascadeType.REMOVE, mappedBy = "category")
     List<Product> productList;
 
 }

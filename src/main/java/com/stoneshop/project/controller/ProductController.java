@@ -3,7 +3,7 @@ package com.stoneshop.project.controller;
 
 import com.stoneshop.project.Dao.ProductService;
 import com.stoneshop.project.model.Product;
-import com.stoneshop.project.repository.SellerRepository;
+import com.stoneshop.project.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,7 +24,7 @@ public class ProductController {
     @Autowired
     ProductService productService;
     @Autowired
-    SellerRepository sellers;
+    CategoryRepository category;
 
     /**
      * Просмотр списка всех товаров в системе
@@ -80,6 +80,7 @@ public class ProductController {
     @PostMapping("/edit/{productid}")
     public String editProduct(@ModelAttribute Product product, @ModelAttribute("file") MultipartFile file, Model model, @PathVariable String productid) {
         String photo = uploadFile(file);
+
         if(photo == null)
             photo = "/img/def.png";
         else photo = "/uploads/" + photo;
@@ -90,6 +91,7 @@ public class ProductController {
         original.setDescription(product.getDescription());
         original.setPrice(product.getPrice());
         original.setSize(product.getSize());
+
         productService.save(original);
         model.addAttribute("product", original);
         return "product_details";
@@ -137,7 +139,7 @@ public class ProductController {
             photo = "/img/def.png";
         else photo = "/uploads/" + photo;
         product.setImage(photo);
-        product.setSeller(sellers.findAll().get(0));
+        //product.setCategory(category.findAll().get(0));
         productService.save(product);
         return "redirect:/monitor";
     }
