@@ -1,13 +1,17 @@
 package com.stoneshop.project.model;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 @Data
-@Table(name = "category")
+@Setter
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+
 /***
  * Класс JPA-сущности для таблицы продавцов
  */

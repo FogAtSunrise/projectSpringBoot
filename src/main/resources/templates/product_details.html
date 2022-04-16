@@ -53,7 +53,9 @@
                     <div class=" container-fluid">
                         <h4 class="col-10" th:text="*{name}"></h4>
                         <h5 class=" m-0" th:text="*{price} + ' ₽'"></h5>
-                       
+                        <p><small class="text-muted"
+                                  th:text="${'Категория ' + product.category.getName()}">
+                        </small></p>
 
                         <h4 class=" mt-3">Описание</h4>
                         <p class="text" th:text="'Размер: '+*{size}"/>

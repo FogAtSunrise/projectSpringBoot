@@ -1,0 +1,87 @@
+
+/*css*/
+.panel
+{
+background: linear-gradient(180deg, #FFFFFF 0%,  #B2B1B1 90%)
+
+}
+@media screen and (max-width: 550px) {
+#main_name {
+visibility: hidden;
+display: none;
+}
+}
+.link_style{
+color:Gray;
+text-decoration: none;
+}
+
+.link_style_in_redact{
+color:Black;
+text-decoration: none;
+font-weight: bold;
+font-size: 25px;
+}
+
+.link_style_for_main{
+color:Black;
+font-family: 'Rubik Moonrocks', cursive;
+text-decoration: none;
+}
+
+.block_back {
+
+  background-color: rgba(255,255,255, 0.7);
+ }
+ 
+ .featurette-divider {
+  margin: 2rem 0; /* Space out the Bootstrap <hr> more */
+}
+
+body {
+background-image: url('https://plitkazavr.ru/images/Varmora/Marble/Brenzo-White-Glossy-60x120.jpg');
+}
+
+.marketing .col-lg-4 {
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+
+
+.list-group-item
+{
+		
+background-color: rgba(255, 255, 255, 0)
+}
+
+table {
+    border: 0px solid black; /* Граница вокруг таблицы */
+	width: 100%;
+   }
+   tr{ 
+border: 1px solid black; /* Граница вокруг ячеек */
+    text-align: left; /* Выравнивание по левому краю */
+   }
+  
+   td {
+    background: rgba(255, 255, 255, 0); /* Цвет фона */
+    border: 0px solid black; /* Граница вокруг ячеек */
+	text-align: right; /* Выравнивание по центру */
+   }
+   
+ .scroll-table {
+	height: 80px;
+	overflow-x: auto;
+	border: 1px solid #000;
+}
+
+
+   
+/*css*/
+
+
+
+
+
+

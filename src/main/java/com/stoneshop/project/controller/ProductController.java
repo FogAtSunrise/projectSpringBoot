@@ -1,7 +1,9 @@
 package com.stoneshop.project.controller;
 
 
+import com.stoneshop.project.Dao.CategoryService;
 import com.stoneshop.project.Dao.ProductService;
+import com.stoneshop.project.model.Category;
 import com.stoneshop.project.model.Product;
 import com.stoneshop.project.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 
@@ -24,7 +28,7 @@ public class ProductController {
     @Autowired
     ProductService productService;
     @Autowired
-    CategoryRepository category;
+    CategoryService category;
 
     /**
      * Просмотр списка всех товаров в системе
@@ -123,8 +127,15 @@ public class ProductController {
      */
     @GetMapping("/create")
     public String create(Model model) {
+
+        List<Category> cat = new ArrayList<>();
+        model.addAttribute("cat", cat);
+        List<Category> categories = category.getAll();
+        model.addAttribute("categories", categories);
+
         model.addAttribute("product", new Product());
         model.addAttribute("isCreate", true);
+
         return "product_edit";
     }
 
@@ -134,6 +145,10 @@ public class ProductController {
      */
     @PostMapping ("/create")
     public String create(@ModelAttribute Product product,  @ModelAttribute("file") MultipartFile file, Model vars) {
+        List<Category> cat = new ArrayList<>();
+        vars.addAttribute("cat", cat);
+        List<Category> categories = category.getAll();
+        vars.addAttribute("categories", categories);
         String photo = uploadFile(file);
         if(photo == null)
             photo = "/img/def.png";

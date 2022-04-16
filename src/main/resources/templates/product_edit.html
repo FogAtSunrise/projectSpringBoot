@@ -14,8 +14,10 @@
           th:object="${product}"
           enctype="multipart/form-data"
           method="post">
+    <div class="container block_back my-5">
             <h3>Редактирование товара</h3>
         <div th:replace="fragments :: product_input"/>
+    </div>>
     </form>
     </span>
     <span th:if="${isCreate}">
@@ -23,8 +25,10 @@
           th:object="${product}"
           enctype="multipart/form-data"
           method="post">
+            <div class="container block_back my-5">
             <h3>Добавление товара</h3>
         <div th:replace="fragments :: product_input"/>
+        </div>
     </form>
     </span>
 
