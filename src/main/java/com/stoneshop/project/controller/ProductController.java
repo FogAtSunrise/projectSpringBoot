@@ -1,11 +1,9 @@
 package com.stoneshop.project.controller;
 
-
 import com.stoneshop.project.Dao.CategoryService;
 import com.stoneshop.project.Dao.ProductService;
 import com.stoneshop.project.model.Category;
 import com.stoneshop.project.model.Product;
-import com.stoneshop.project.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,7 +22,7 @@ import java.util.List;
 @Controller
 
 public class ProductController {
-    private final String UPLOAD_DIR = "./src/main/resources/static/uploads/";
+    private final String UPLOAD_DIR = "./src/main/resources/static/resources/";
     @Autowired
     ProductService productService;
     @Autowired
@@ -87,11 +85,10 @@ public class ProductController {
 
         if(photo == null)
             photo = "/img/def.png";
-        else photo = "/uploads/" + photo;
+
         Product original = productService.find(Long.valueOf(productid)).get();
         original.setImage(photo);
         original.setName(product.getName());
-        original.setCount(product.getCount());
         original.setDescription(product.getDescription());
         original.setPrice(product.getPrice());
         original.setSize(product.getSize());
@@ -152,7 +149,7 @@ public class ProductController {
         String photo = uploadFile(file);
         if(photo == null)
             photo = "/img/def.png";
-        else photo = "/uploads/" + photo;
+        else photo = "/resources/" + photo;
         product.setImage(photo);
         //product.setCategory(category.findAll().get(0));
         productService.save(product);
@@ -174,7 +171,7 @@ public class ProductController {
             return fileName;
 
     }
-    @PostMapping("/upload")
+    @PostMapping("/resources")
     public String uploadFile1(@ModelAttribute("file") MultipartFile file) throws IOException {
 
         // check if file is empty

@@ -18,8 +18,7 @@ public class Product {
     private Long id;
     @Column
     private String name;
-    @Column
-    private Integer count;
+
     @Column
     private BigDecimal price;
     @Column
@@ -27,8 +26,8 @@ public class Product {
     @Column
     private String size;
 
-    @Column(nullable = true)
-    private String image = "def.png";
+    @Column(nullable = false)
+    private String image;
     @ManyToOne()
     private Category category;
 
