@@ -21,10 +21,9 @@ public class ProductCrudService {
     ProductRepository productRepository;
 
     /**
-     * Процедура сохранения нового города в БД
+     * Процедура сохранения нового  изделия в БД
      *
-     * @param productForm форма с данными нового города
-     * @throws IOException исключение в случае ошибки доступа (при сбое временного хранилища)
+
      */
     @Transactional
     public void save(ProductForm productForm) throws IOException {

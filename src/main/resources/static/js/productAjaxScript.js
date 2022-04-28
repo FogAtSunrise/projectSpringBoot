@@ -38,39 +38,20 @@ $(document).ready(function () {
         });
     });
 
-    //Поиск города
-    $productFindInput.on('input', function (e) {
-        e.preventDefault();
-        let inputData = JSON.stringify({
-            "text" : $productFindInput.val()
-        });
-        $.ajax({
-            type: 'POST',
-            url: '/products/find',
-            data: inputData,
-            processData: false,
-            contentType: 'application/json',
-            dataType: "json"
-        }).done(function (response) {
-            hideProductCards();
-            for (let i = 0; i < response.length; i++) {
-                $("#product_" + response[i].id).show();
-            }
-        });
-    });
 
-    //Скрыть все карточки городов
+
+    //Скрыть все
     function hideProductCards() {
         $(".product_card").each(function () {
             $(this).hide();
         });
     }
 
-    //Отобразить город
+    //Отобразить
     function showNewProduct(product) {
         let $newCard = $('<div class="col product_card">' +
             '<div class="card shadow-sm">' +
-            '<img src="" alt="Город" class="img-fluid">' +
+            '<img src="" alt=".." class="img-fluid">' +
             '<div class="card-body">' +
             '<p class="card-text"></p>' +
             '<div class="d-flex justify-content-between align-items-center">' +
