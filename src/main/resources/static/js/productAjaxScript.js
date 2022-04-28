@@ -7,7 +7,7 @@ $(document).ready(function () {
 
 
 
-    //Отправка формы добавления города
+    //Отправка формы добавления изделия
     $productForm.on('submit', function (e) {
         e.preventDefault();
         let formData = new FormData(this);
@@ -26,7 +26,7 @@ $(document).ready(function () {
         });
     });
 
-    //Удалить город
+    //Удалить изделия
     $(document).on('click', '.btn-product-delete', function () {
         let id = $(this).attr("id");
         $.ajax({
