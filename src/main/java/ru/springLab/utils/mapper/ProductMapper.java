@@ -22,11 +22,12 @@ public class ProductMapper {
         return ProductModel.builder()
                 .id(productEntity.getId())
                 .name(productEntity.getName())
-                .description(productEntity.getDescription())
                 .category(productEntity.getCategory())
-                .photo("data:image/jpeg;base64," + imgTransformationUtils.byteToBase64(productEntity.getPhoto()))
                 .size(productEntity.getSize())
                 .price(productEntity.getPrice())
+                .description(productEntity.getDescription())
+                .photo("data:image/jpeg;base64," + imgTransformationUtils.byteToBase64(productEntity.getPhoto()))
+
                 .build();
     }
 
@@ -47,9 +48,10 @@ public class ProductMapper {
         return ProductEntity.builder()
                 .id(productForm.getId())
                 .name(productForm.getName())
-                .description(productForm.getDescription())
+                .category(productForm.getCategory())
                 .size(productForm.getSize())
                 .price(productForm.getPrice())
+                .description(productForm.getDescription())
                 .build();
     }
 
