@@ -36,15 +36,40 @@ $(document).ready(function () {
     });
 
 
-
-
-
     //Скрыть все
     function hideProductCards() {
         $(".product_card").each(function () {
             $(this).hide();
         });
     }
+
+
+//Форма ввода для поиска
+
+
+    let $productFindInput = $("#findProductInput");
+
+       //Поиск
+        $productFindInput.on('input', function (e) {
+            e.preventDefault();
+            let inputData = JSON.stringify({
+                "text" : $productFindInput.val()
+            });
+            $.ajax({
+                type: 'POST',
+                url: '/products/find',
+                data: inputData,
+                processData: false,
+                contentType: 'application/json',
+                dataType: "json"
+            }).done(function (response) {
+                hideProductCards();
+                for (let i = 0; i < response.length; i++) {
+                    $("#product_" + response[i].id).show();
+                }
+            });
+        });
+
 
     //Отобразить
     function showNewProduct(product) {
@@ -76,3 +101,4 @@ $(document).ready(function () {
     }
 
 });
+
