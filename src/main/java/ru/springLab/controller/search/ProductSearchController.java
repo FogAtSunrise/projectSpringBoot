@@ -21,10 +21,7 @@ public class ProductSearchController {
     ProductSearchService productSearchService;
 
     /**
-     * Метод загрузки страницы всех городов
-     *
-     * @param model модель для передачи данных на страницу
-     * @return страница городов
+     * Метод загрузки страницы всех
      */
     @GetMapping("/products")
     public String loadProductsPage(Model model) {
@@ -37,11 +34,8 @@ public class ProductSearchController {
     }
 
     /**
-     * Метод загрузки страницу конкретного города с требуемым id
-     *
-     * @param id    id города
-     * @param model модель для передачи данных на страницу
-     * @return страница города
+     * Метод загрузки страницу конкретного товара требуемым id
+
      */
     @GetMapping("/products/{id}")
     public String loadProductDetailsPage(@PathVariable Long id, Model model) {
@@ -53,10 +47,9 @@ public class ProductSearchController {
     }
 
     /**
-     * Метод обработки запроса на поиск городов по фрагменту имени
+     * Метод обработки запроса на поиск товаров по фрагменту имени
      *
-     * @param nameFragmentJSON JSON с фрагментом имени
-     * @return объект со статусом ответа на запрос и передаваемыми данными от сервера(список найденных городов)
+
      */
     @PostMapping("/products/find")
     @ResponseBody

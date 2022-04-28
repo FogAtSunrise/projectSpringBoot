@@ -24,10 +24,9 @@ public class ProductCrudController {
     ProductSearchService productSearchService;
 
     /**
-     * Метод обработки запроса на сохранение нового города
+     * Метод обработки запроса на сохранение нового изделия
      *
-     * @param productForm данные о новом городе
-     * @return объект со статусом ответа на запрос и передаваемыми данными от сервера
+
      */
     @PostMapping("/add_product")
     @ResponseBody
@@ -43,9 +42,9 @@ public class ProductCrudController {
     }
 
     /**
-     * Метод обработки запроса на удаление города по ID со страницы городов
+     * Метод обработки запроса на удаление города по ID со страницы товара
      *
-     * @param id ID удаляемого города
+
      */
     @GetMapping("/delete_product_from_page/{id}")
     public void deleteProductByIdFromProductsPage(@PathVariable Long id) {
@@ -55,10 +54,9 @@ public class ProductCrudController {
     }
 
     /**
-     * Метод обработки запроса на удаление города по ID
+     * Метод обработки запроса на удаление изделия по ID
      *
-     * @param id ID удаляемого города
-     * @return редирект на страницу городов
+
      */
     @GetMapping("/delete_product/{id}")
     public RedirectView deleteProductById(@PathVariable Long id) {
@@ -69,11 +67,8 @@ public class ProductCrudController {
     }
 
     /**
-     * Метод обработки запроса на обновление города
+     * Метод обработки запроса на обновление
      *
-     * @param id        id города для обновления
-     *
-     * @return редирект на страницу того же города
      */
     @PostMapping("/update_product/{id}")
     public RedirectView updateProductById(@PathVariable Long id, @ModelAttribute ProductForm productForm,
