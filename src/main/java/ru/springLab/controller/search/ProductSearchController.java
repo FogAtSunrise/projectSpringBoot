@@ -34,6 +34,19 @@ public class ProductSearchController {
     }
 
     /**
+     * Метод загрузки страницы всех
+     */
+    @GetMapping("/catalog")
+    public String loadCatalogPage(Model model) {
+        log.info("[GET - /catalog]\tEntered loadProductsPage method");
+        List<ProductModel> products = productSearchService.findAll();
+        model.addAttribute("catalog", products);
+        model.addAttribute("productForm", new ProductForm());
+        log.info("[GET - /catalog]\tLoading products page");
+        return "catalog";
+    }
+
+    /**
      * Метод загрузки страницу конкретного товара требуемым id
 
      */
@@ -45,7 +58,14 @@ public class ProductSearchController {
         log.info("[GET - /products/" + id + "]\tLoading product_details page");
         return "product_details";
     }
-
+    @GetMapping("/catalog/{id}")
+    public String loadCatalogDetailsPage(@PathVariable Long id, Model model) {
+        log.info("[GET - /catalog/" + id + "]\tEntered loadProductsDetailsPage method");
+        model.addAttribute("product", productSearchService.findById(id));
+        model.addAttribute("productForm", new ProductForm());
+        log.info("[GET - /catalog/" + id + "]\tLoading product_details page");
+        return "catalog_details";
+    }
     /**
      * Метод обработки запроса на поиск товаров по фрагменту имени
      *
