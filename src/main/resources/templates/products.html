@@ -53,8 +53,8 @@
                 </li>
             </ul>
             <form class="d-flex me-2 my-2">
-                <input class="me-2" type="text" />
-                <button class="btn btn-dark" type="submit">Поиск</button>
+                <input type="text" class="form-control" aria-label="Default" id="findProductsInput">
+
             </form>
             <a class="btn btn-dark my-2" href="/products">Вход</a>
         </div>
@@ -63,215 +63,123 @@
 
 
 
-<main class="container block_back p-5 mt-2">
 
 
 
-            <div class="row justify-content-center p-e-5">
 
-                <div class="col-6 col-md-5 col-lg-4 col-xl-3 card-container" id="add-card">
+<main>
 
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <button type="button" class="btn" onclick="openForm(modalAddProduct)">
-                                <img src="/img/plus.png" alt=".." class="img-fluid">
-                            </button>
+    <div class="p-5 mt-2">
+        <div class="container block_back">
+
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+                <div class="col-6 col-md-5 col-lg-4 col-xl-3" id="add-card">
+                    <div class="card shadow-sm">
+
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <button type="button" class="btn btn-sm btn-outline-success"
+                                        onclick="openForm(modalAddProduct)">
+                                    <img src="/img/plus.png" alt="Добавить" class="img-fluid">
+
+                                </button>
+                            </div>
                         </div>
                     </div>
-
                 </div>
 
 
-
-                <div class="col-6 col-md-5 col-lg-4 col-xl-3 card-container " th:id="${'product_' + product.id}" th:each="product : ${products}">
-                    <div class="card-edit block_back">
-                        <div class="image-container">
-                            <div class="square-image card-img-top" >
-                                <img th:src="${product.getPhoto()}"
-                                     alt="..."
-                                     class="img-fluid">
-                            </div>
-                        </div>
+                <div class="col-6 col-md-5 col-lg-4 col-xl-3 product_card" th:id="${'product_' + product.id}" th:each="product : ${products}">
+                    <div class="card shadow-sm">
+                        <img th:src="${product.getPhoto()}"
+                             alt="Город"
+                             class="img-fluid">
                         <div class="card-body">
-
-                            <h4 class="card-subtitle" th:utext="${product.getName()}"></h4>
-
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item" ></li>
-                                <li class="list-group-item" ><b>Цена: </b><nowrap class="card-text" th:utext="${product.getPrice()}"/> ₽  </li>
-                                <li class="list-group-item" ><b>Размер: </b><nowrap class="card-text" th:utext="${product.getSize()}"/></li>
-                            </ul>
-
-                            <div class=" row justify-content-center p-2 ">
-
-                                <a class="col-5 link_style btn btn-outline-primary btn-dark  border-0 m-1"  th:attr="onclick='javascript:openCngForm(modalChangeProduct,
-            \''+ ${product.getName()} + '\',
-            \''+ ${product.getCategory()} + '\',
-            \''+ ${product.getSize()} + '\',
-            \''+ ${product.getPrice()} + '\',
-            \'' + ${product.getDescription()} + '\'
-            )' ">Изменить</a>
-                                <a  class="col-5 link_style btn btn-outline-danger btn-dark  border-0 m-1" onclick="openForm(modalDeleteProduct)">Удалить</a>
-                                <a  th:href="@{/products/{id}(id=${product.getId()})}" class="col-10 link_style btn btn-outline-primary btn-dark  border-0  p-1 ">Подробнее</a>
-
-                            </div>
-
-                        </div>
-                    </div>
-
-
-
-
-                    <div class="modal py-5 " tabindex="-1" role="dialog" id="modalDeleteProduct">
-                        <div class="modal-dialog " role="document">
-                            <div class="modal-content rounded-4 shadow">
-                                <div class="modal-body p-4 text-center">
-                                    <h5 class="mb-0">Вы уверены, что хотите удалить это изделие?</h5>
-                                </div>
-                                <div class="modal-footer flex-nowrap p-0">
-                                    <button type="button" class="btn btn-sm btn-danger btn-lg fs-6 text-decoration-none col-6 m-0 rounded-0
-                      data-bs-dismiss=modal"><strong>
-                                        <a class="btn btn-danger" th:href="@{/delete_product/{id}(id=${product.getId()})}">
-                                            Удаляй
-                                        </a>
-                                    </strong></button>
-                                    <button type="button" class="btn btn-lg fs-6 text-decoration-none col-6 m-0 rounded-0"
-                                            data-bs-dismiss="modal" onclick="closeForm(modalDeleteProduct)">Отмена
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="modal py-5" tabindex="-1" id="modalChangeProduct">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content rounded-5 shadow">
-                                <div class="modal-header p-5 pb-4 border-bottom-0">
-                                    <h2 class="fw-bold mb-0">Редактировать изделие</h2>
-                                    <button type="button" id="close" class="btn-close" onclick="closeForm(modalChangeProduct)"
-                                            aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body p-5 pt-0">
-                                    <form class="" action="#" th:action="@{/update_product/{id}(id=${product.getId()})}"
-                                          th:object="${productForm}" enctype="multipart/form-data" method="post">
-
-                                        <div class="form-floating mb-3">
-                                            <input type="text" class="form-control rounded-4" id="floatingName"
-                                                   placeholder="name" maxlength="100" th:field="*{name}">
-                                            <label for="floatingName">Наименование</label>
-                                        </div>
-
-                                        <div class="form-floating mb-3">
-                                            <input type="text" class="form-control rounded-4" id="categoryNsme"
-                                                   placeholder="category" maxlength="100" th:field="*{category}">
-                                            <label for="categoryNsme">Категория</label>
-                                        </div>
-
-                                        <div class="form-floating mb-3">
-                                            <input type="text" class="form-control rounded-4" id="pricesize"
-                                                   placeholder="size" maxlength="100" th:field="*{size}">
-                                            <label for="pricesize">Размер</label>
-                                        </div>
-
-                                        <div class="form-floating mb-3">
-                                            <input type="text" class="form-control rounded-4" id="priceName"
-                                                   placeholder="price" maxlength="100" th:field="*{price}">
-                                            <label for="priceName">Цена</label>
-                                        </div>
-                                        <div class="form-floating mb-3">
-                            <textarea class="form-control rounded-4 inp" id="floatingDesc" placeholder="desc"
-                                      rows="10" maxlength="1000" th:field="*{description}">
-                            </textarea>
-                                            <label for="floatingDesc">Описание</label>
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="photoProduct">Фотография</label>
-                                            <input class="form-control" type="file" id="photoProduct" name="photoProduct"
-                                                   accept="image/png, image/jpeg"> </div>
-                                        <button class="w-100 mb-2 btn btn-lg rounded-4 btn-success" type="submit">Изменить</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                            <p class="card-text" th:utext="${product.getName()}"></p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <a th:href="@{/products/{id}(id=${product.getId()})}">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-dark btn-outline-info">Подробнее</button>
                                     </div>
+                                </a>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-dark btn-product-delete
+                                    btn-outline-danger  " th:id="${product.id}">Удалить</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
 
 
 
 
             </div>
+        </div>
+    </div>
 
 
-
-
-
-                <div class="modal py-5" tabindex="-1" id="modalAddProduct">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content rounded-5 shadow">
-                            <div class="modal-header p-5 pb-4 border-bottom-0">
-                                <h2 class="fw-bold mb-0">Добавить новое изделие</h2>
-                                <button type="button" id="close" class="btn-close" onclick="closeForm(modalAddProduct)"
-                                        aria-label="Close"></button>
-                            </div>
-                            <div id="productFormPanel" class="modal-body p-5 pt-0">
-                                <form class="" th:action="@{/add_product}" th:object="${productForm}"
-                                      enctype="multipart/form-data"
-                                      method="post" id="productForm">
-                                    <div class="form-floating mb-3">
-                                        <input type="text" class="form-control rounded-4" id="name"
-                                               placeholder="Name" maxlength="100" th:field="*{name}">
-                                        <label for="name">Наименование</label>
-                                    </div>
-                                    <div class="form-floating mb-3">
+    <div class="modal py-5" tabindex="-1" id="modalAddProduct">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content rounded-5 shadow">
+                <div class="modal-header p-5 pb-4 border-bottom-0">
+                    <h2 class="fw-bold mb-0">Добавить новое изделие</h2>
+                    <button type="button" id="close" class="btn-close" onclick="closeForm(modalAddProduct)"
+                            aria-label="Close"></button>
+                </div>
+                <div id="productFormPanel" class="modal-body p-5 pt-0">
+                    <form class="" th:action="@{/add_product}" th:object="${productForm}"
+                          enctype="multipart/form-data"
+                          method="post" id="productForm">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control rounded-4" id="name"
+                                   placeholder="Name" maxlength="100" th:field="*{name}">
+                            <label for="name">Наименование</label>
+                        </div>
+                        <div class="form-floating mb-3">
                             <textarea class="form-control rounded-4" id="category" placeholder="category"
                                       rows="10" th:field="*{category}"></textarea>
-                                        <label for="category">Категория</label>
-                                    </div>
+                            <label for="category">Категория</label>
+                        </div>
 
-                                    <div class="form-floating mb-3">
+                        <div class="form-floating mb-3">
                             <textarea class="form-control rounded-4" id="size1" placeholder="size"
                                       th:field="*{size}"></textarea>
-                                        <label for="size1">Размер</label>
-                                    </div>
+                            <label for="size1">Размер</label>
+                        </div>
 
-                                    <div class="form-floating mb-3">
+                        <div class="form-floating mb-3">
                             <textarea class="form-control rounded-4" id="price" placeholder="price"
                                       th:field="*{price}"></textarea>
-                                        <label for="price">Цена</label>
-                                    </div>
+                            <label for="price">Цена</label>
+                        </div>
 
 
 
 
-                                    <div class="form-floating mb-3">
+                        <div class="form-floating mb-3">
                             <textarea class="form-control rounded-4" id="description" placeholder="desc"
                                       rows="10" th:field="*{description}"></textarea>
-                                        <label for="description">Описание</label>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="photo">Фотография</label>
-                                        <input class="form-control" type="file" id="photo" name="photo"
-                                               accept="image/png, image/jpeg">
-                                    </div>
-
-
-
-
-                                    <button class="w-100 mb-2 btn btn-lg rounded-4 btn-success" type="submit">Добавить</button>
-                                </form>
-                            </div>
+                            <label for="description">Описание</label>
                         </div>
-                    </div>
+                        <div class="mb-3">
+                            <label for="photo">Фотография</label>
+                            <input class="form-control" type="file" id="photo" name="photo"
+                                   accept="image/png, image/jpeg">
+                        </div>
+
+
+
+
+                        <button class="w-100 mb-2 btn btn-lg rounded-4 btn-success" type="submit">Добавить</button>
+                    </form>
                 </div>
-
-
-
-
             </div>
-
-
-
+        </div>
+    </div>
 
 
 </main>

@@ -116,7 +116,94 @@
 
                         <p class="text" th:utext="${product.getDescription()}"> </p>
 
-                        <a href="#" class="btn btn-dark">Купить</a>
+                        <a href="#" class=" col-5 btn btn-dark">Купить</a>
+                        <a class="col-5 link_style btn btn-outline-primary btn-dark  border-0 m-1"  th:attr="onclick='javascript:openCngForm(modalChangeProduct,
+            \''+ ${product.getName()} + '\',
+            \''+ ${product.getCategory()} + '\',
+            \''+ ${product.getSize()} + '\',
+            \''+ ${product.getPrice()} + '\',
+            \'' + ${product.getDescription()} + '\'
+            )' ">Изменить</a>
+                        <a  class="col-5 link_style btn btn-outline-danger btn-dark  border-0 m-1" onclick="openForm(modalDeleteProduct)">Удалить</a>
+
+
+
+
+                        <div class="modal py-5 " tabindex="-1" role="dialog" id="modalDeleteProduct">
+                            <div class="modal-dialog " role="document">
+                                <div class="modal-content rounded-4 shadow">
+                                    <div class="modal-body p-4 text-center">
+                                        <h5 class="mb-0">Вы уверены, что хотите удалить это изделие?</h5>
+                                    </div>
+                                    <div class="modal-footer flex-nowrap p-0">
+                                        <button type="button" class="btn btn-sm btn-danger btn-lg fs-6 text-decoration-none col-6 m-0 rounded-0
+                      data-bs-dismiss=modal"><strong>
+                                            <a class="btn btn-danger" th:href="@{/delete_product/{id}(id=${product.getId()})}">
+                                                Удаляй
+                                            </a>
+                                        </strong></button>
+                                        <button type="button" class="btn btn-lg fs-6 text-decoration-none col-6 m-0 rounded-0"
+                                                data-bs-dismiss="modal" onclick="closeForm(modalDeleteProduct)">Отмена
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="modal py-5" tabindex="-1" id="modalChangeProduct">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content rounded-5 shadow">
+                                    <div class="modal-header p-5 pb-4 border-bottom-0">
+                                        <h2 class="fw-bold mb-0">Редактировать изделие</h2>
+                                        <button type="button" id="close" class="btn-close" onclick="closeForm(modalChangeProduct)"
+                                                aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body p-5 pt-0">
+                                        <form class="" action="#" th:action="@{/update_product/{id}(id=${product.getId()})}"
+                                              th:object="${productForm}" enctype="multipart/form-data" method="post">
+
+                                            <div class="form-floating mb-3">
+                                                <input type="text" class="form-control rounded-4" id="floatingName"
+                                                       placeholder="name" maxlength="100" th:field="*{name}">
+                                                <label for="floatingName">Наименование</label>
+                                            </div>
+
+                                            <div class="form-floating mb-3">
+                                                <input type="text" class="form-control rounded-4" id="categoryNsme"
+                                                       placeholder="category" maxlength="100" th:field="*{category}">
+                                                <label for="categoryNsme">Категория</label>
+                                            </div>
+
+                                            <div class="form-floating mb-3">
+                                                <input type="text" class="form-control rounded-4" id="pricesize"
+                                                       placeholder="size" maxlength="100" th:field="*{size}">
+                                                <label for="pricesize">Размер</label>
+                                            </div>
+
+                                            <div class="form-floating mb-3">
+                                                <input type="text" class="form-control rounded-4" id="priceName"
+                                                       placeholder="price" maxlength="100" th:field="*{price}">
+                                                <label for="priceName">Цена</label>
+                                            </div>
+                                            <div class="form-floating mb-3">
+                            <textarea class="form-control rounded-4 inp" id="floatingDesc" placeholder="desc"
+                                      rows="10" maxlength="1000" th:field="*{description}">
+                            </textarea>
+                                                <label for="floatingDesc">Описание</label>
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="photoProduct">Фотография</label>
+                                                <input class="form-control" type="file" id="photoProduct" name="photoProduct"
+                                                       accept="image/png, image/jpeg"> </div>
+                                            <button class="w-100 mb-2 btn btn-lg rounded-4 btn-success" type="submit">Изменить</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     </div>
                 </div>
             </div>
