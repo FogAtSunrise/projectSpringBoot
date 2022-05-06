@@ -14,17 +14,17 @@
 <body>
 
 
-<form style="border:2px solid #555; box-shadow:3px 3px 5px #999; width: 400px; text-align:center;  margin:20px; padding:20px;"
+<form style="border:2px solid #555; box-shadow:3px 3px 5px #999; width: 400px; text-align:center;  margin:20px; padding:20px; position: fixed; left: 33%;"
       th:action="@{/login}" method="post">
     <p> Login</p>
         <input type="text" name="username"/>
     <p class ="mt-2"> Password</p>
         <input type="password" name="password"/>
     <input type="hidden" name="_csrf" value="{{_csrf.token}}" />
-    <div><input class="btn btn-dark my-2" type="submit" value=  "          Войти         "/>
+    <div><input class="btn btn-dark my-2" type="submit" value=  "            Войти            "/>
 
     </div>
-    <a class="btn btn-dark my-2" href="/">Войти как гость</a>
+    <a class="btn btn-dark my-2" href="/">Зарегистрироваться</a>
 </form>
 
 

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" >
+<html xmlns:th="http://www.thymeleaf.org" lang="en" >
 
 <head>
     <meta charset="utf-8">
@@ -48,13 +48,61 @@
                 </li>
 
                 <li class="nav-item">
+                    <a class="nav-link"  onclick="openForm(modalMyProduct)">Мои заказы</a>
+
+
+
+
+                    <div class="modal py-5 " tabindex="-1" role="dialog" id="modalMyProduct">
+
+                        <div class="modal-dialog " role="document">
+                            <div class="modal-content rounded-4 shadow">
+                                <div class="modal-header  border-bottom-0">
+                                    <h2 class="fw-bold mb-0">Мои заказы</h2>
+                                    <button type="button" id="close" class="btn-close" onclick="closeForm(modalMyProduct)"
+                                            aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body p-2 text-center">
+                                    <table>
+
+                                        <tr>
+                                            <th>№</th>
+                                            <th>Наименование</th>
+                                            <th>Цена, руб.</th>
+                                            <th class="px-2 text-center">Статус</th>
+                                            <th></th>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Шкатулка "Цветок"</td>
+                                            <td>20,00</td>
+                                            <th class="px-2 text-center">На складе</th>
+                                            <td><button class = "form-control btn btn-dark">Отменить</button></td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>Ваза "Ваза"</td>
+                                            <td>30,00</td>
+                                            <th class="px-2 text-center">В пути</th>
+                                            <td><button class = "form-control btn btn-dark">Отменить</button></td>
+                                        </tr>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                    </div>
+                </li>
+
+                <li class="nav-item">
                     <a class="nav-link" href="/about">Контакты</a>
                 </li>
             </ul>
-            <form class="d-flex me-2 my-2">
-                <input class="me-2" type="text" />
+            <form  th:action="@{/logout}" method="post">
+                <input class="btn btn-dark" type="submit" value="Выход"/>
             </form>
-            <a class="btn btn-dark my-2" href="/products">Вход</a>
         </div>
     </div>
 </nav>
@@ -78,8 +126,13 @@
     </div>
 </div>
 
+<footer class="footer1 p-3 d-flex mt-auto justify-content-center bottom-0" >
+    <div class="container text-center text-black">
+        © 2022 Все права защищены.
+    </div>
 
-
+</footer>
+<script src="/js/modalFormScripts.js"></script>
 <!-- JavaScript: Bootstrap Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"

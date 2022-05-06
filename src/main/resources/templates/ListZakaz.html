@@ -1,0 +1,129 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ru" >
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <title>Редактор каталога</title>
+
+    <link rel="stylesheet" href="css/page_style.css" type="text/css"  />
+</head>
+<body>
+
+
+
+
+
+<nav class="navbar navbar-expand-md navbar-light panel">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/products">
+            <img src="img/log3.ico" alt="..." class="img-fluid">
+        </a>
+        <a class="navbar-brand link_style_for_main" href="/products" id="main_name"> ГУП «Колыванский камнерезный<br/>завод имени И.И. Ползунова»</a>
+        <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarCollapse"
+                aria-controls="navbarCollapse"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+        >
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+
+
+
+            <ul class="navbar-nav me-auto mb-2 mb-md-0">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/products">Каталог изделий</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/ListZakaz">Лист заказов</a>
+                </li>
+
+            </ul>
+
+
+
+            <form  th:action="@{/logout}" method="post">
+                <input class="btn btn-dark" type="submit" value="Выход"/>
+
+
+            </form>
+
+        </div>
+    </div>
+</nav>
+
+<table class="pb-5 pt-3  block_back">
+    <colgroup>
+
+    </colgroup>
+    <tr>
+
+        <th>#</th>
+        <th> <input type="checkbox" id="scales" name="scales"></th>
+        <th>Номер заказа</th>
+        <th>ФИО</th>
+        <th>Адрес</th>
+        <th>Дата</th>
+        <th>Цена, руб.</th>
+        <th>Статус</th>
+        <th>Удалить</th>
+    </tr>
+    <tr>
+        <td>1</td>
+        <th> <input type="checkbox"  name="scales"></th>
+        <th>8382848482</th>
+        <th>Курилин А.С.</th>
+        <th>г.Змеиногорск, уд.Ленина д.12</th>
+        <th>12.12.22</th>
+        <th>23456</th>
+
+        <td ><select  class = "form-control">
+            <option value="-">Отказ</option>
+            <option value="A">В пути</option>
+            <option value="B">Доставлен</option>
+
+        </select></td>
+
+        <td ><button class = "form-control btn btn-dark">Удалить</button></td>
+    </tr>
+    <tr>
+        <td>2</td>
+        <th> <input type="checkbox" name="scales"></th>
+        <th>8382848483</th>
+        <th>Ватрушкин Т.Д.</th>
+        <th>г.Курск, уд.Ленина д.12</th>
+        <th>12.12.22</th>
+        <th>65432</th>
+
+        <td ><select class = "form-control">
+            <option value="A">В пути</option>
+            <option value="B">Доставлен</option>
+            <option value="-">Отказ</option>
+        </select></td>
+
+        <td ><button class = "form-control btn btn-dark">Удалить</button></td>
+    </tr>
+</table>
+
+<footer class="footer1 p-3 d-flex mt-auto justify-content-center bottom-0" >
+    <div class="container text-center text-black">
+        © 2022 Все права защищены.
+    </div>
+
+</footer>
+</body>
+
+</html>
+
+

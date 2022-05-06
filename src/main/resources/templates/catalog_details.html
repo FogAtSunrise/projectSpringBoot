@@ -45,13 +45,64 @@
                 <li class="nav-item">
                     <a class="nav-link active" href="/catalog">Каталог изделий</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link"  onclick="openForm(modalMyProduct)">Мои заказы</a>
 
+
+
+
+                    <div class="modal py-5 " tabindex="-1" role="dialog" id="modalMyProduct">
+
+                        <div class="modal-dialog " role="document">
+                            <div class="modal-content rounded-4 shadow">
+                                <div class="modal-header  border-bottom-0">
+                                    <h2 class="fw-bold mb-0">Мои заказы</h2>
+                                    <button type="button" id="close" class="btn-close" onclick="closeForm(modalMyProduct)"
+                                            aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body p-2 text-center">
+                                    <table>
+
+                                        <tr>
+                                            <th>№</th>
+                                            <th>Наименование</th>
+                                            <th>Цена, руб.</th>
+                                            <th class="px-2 text-center">Статус</th>
+                                            <th></th>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Шкатулка "Цветок"</td>
+                                            <td>20,00</td>
+                                            <th class="px-2 text-center">На складе</th>
+                                            <td><button class = "form-control btn btn-dark">Отменить</button></td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>Ваза "Ваза"</td>
+                                            <td>30,00</td>
+                                            <th class="px-2 text-center">В пути</th>
+                                            <td><button class = "form-control btn btn-dark">Отменить</button></td>
+                                        </tr>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                    </div>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/about">Контакты</a>
                 </li>
             </ul>
 
-            <a class="btn btn-dark my-2" href="/products">Вход</a>
+            <form  th:action="@{/logout}" method="post">
+                <input class="btn btn-dark" type="submit" value="Выход"/>
+
+
+            </form>
         </div>
     </div>
 </nav>
@@ -109,9 +160,98 @@
 
                         <p class="text" th:utext="${product.getDescription()}"> </p>
 
-                        <a href="#" class=" col-5 btn btn-dark">Купить</a>
+                        <a  onclick="openForm(modalProduct)" class=" col-5 btn btn-dark">Оформить заказ</a>
 
                     </div>
+
+
+
+                    <div class="modal py-5" tabindex="-1" id="modalProduct">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content rounded-5 shadow">
+                                <div class="modal-header p-5 pb-4 border-bottom-0">
+                                    <h2 class="fw-bold mb-0">Оформление заказа</h2>
+                                    <button type="button" id="close" class="btn-close" onclick="closeForm(modalProduct)"
+                                            aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body p-5 pt-0">
+
+
+                                    <form class="" >
+
+                                        <table>
+
+                                            <tr>
+                                                <th>
+
+                                                   <div> <label><b>Товар:</b></label>
+                                                    <label th:utext="${product.getName()}"></label></div>
+                                                    <div><label><b>Сумма:</b></label>
+                                                    <label th:utext="${product.getPrice()}"></label>
+                                                        <label><b>руб.</b></label></div>
+
+                                                </th>
+                                            </tr>
+                                        </table>
+
+
+                                        <div class="form-group p-2">
+                                            <label>ФИО:</label>
+                                            <input
+                                                    type="text"
+                                                    name="name"
+                                                    class="form-control"
+                                                    id="name"
+                                                    placeholder="Введите ФИО"
+                                            />
+                                        </div>
+                                        <div class="form-group p-2">
+                                            <label>Адрес отправки:</label>
+                                            <input
+                                                    type="text"
+                                                    name="adress"
+                                                    class="form-control"
+                                                    id="adress"
+                                                    placeholder="Введите адрес"
+                                            />
+                                        </div>
+                                        <div class="form-group p-2">
+                                            <label>E-mail:</label>
+                                            <input
+                                                    type="email"
+                                                    name="email"
+                                                    class="form-control"
+                                                    id="email1"
+                                                    placeholder="Введите Email"
+                                            />
+                                        </div>
+                                        <div class="form-group p-2">
+                                            <label>Номер телефона:</label>
+                                            <input
+                                                    type="tel"
+                                                    name="telephone"
+                                                    class="form-control"
+                                                    id="phone"
+                                                    placeholder="Введите номер в формате +7-XXX-XXX-XX-XX"
+                                            />
+                                        </div>
+                                        <div class="form-group p-2">
+                                            <label>Сообщение:</label>
+                                            <textarea class="form-control" name="message" rows="3"></textarea>
+                                        </div>
+
+                                        <button type="button" class="btn btn-dark mx-2 mt-2">
+                                            Отправить
+                                        </button>
+                                    </form>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
 
                 </div>
             </div>
@@ -131,6 +271,12 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
+
+<footer class="footer p-3 d-flex mt-auto justify-content-center bottom-0" >
+    <div class="container text-center text-black">
+        © 2022 Все права защищены.
+    </div>
+</footer>
 </body>
 </html>
 

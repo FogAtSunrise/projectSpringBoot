@@ -49,14 +49,63 @@
                 </li>
 
                 <li class="nav-item">
+                    <a class="nav-link"  onclick="openForm(modalMyProduct)">Мои заказы</a>
+
+
+
+
+                    <div class="modal py-5 " tabindex="-1" role="dialog" id="modalMyProduct">
+
+                        <div class="modal-dialog " role="document">
+                            <div class="modal-content rounded-4 shadow">
+                                <div class="modal-header  border-bottom-0">
+                                    <h2 class="fw-bold mb-0">Мои заказы</h2>
+                                    <button type="button" id="close" class="btn-close" onclick="closeForm(modalMyProduct)"
+                                            aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body p-2 text-center">
+                                    <table>
+
+                                        <tr>
+                                            <th>№</th>
+                                            <th>Наименование</th>
+                                            <th>Цена, руб.</th>
+                                            <th class="px-2 text-center">Статус</th>
+                                            <th></th>
+                                        </tr>
+                                        <tr>
+                                            <td>1</td>
+                                            <td>Шкатулка "Цветок"</td>
+                                            <td>20,00</td>
+                                            <th class="px-2 text-center">На складе</th>
+                                            <td><button class = "form-control btn btn-dark">Отменить</button></td>
+                                        </tr>
+                                        <tr>
+                                            <td>2</td>
+                                            <td>Ваза "Ваза"</td>
+                                            <td>30,00</td>
+                                            <th class="px-2 text-center">В пути</th>
+                                            <td><button class = "form-control btn btn-dark">Отменить</button></td>
+                                        </tr>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                    </div>
+                </li>
+
+                <li class="nav-item">
                     <a class="nav-link" href="/about">Контакты</a>
                 </li>
             </ul>
-            <form class="d-flex me-2 my-2">
-                <input type="text" class="form-control" aria-label="Default" id="findProductsInput">
+            <form  th:action="@{/logout}" method="post">
+                <input class="btn btn-dark" type="submit" value="Выход"/>
+
 
             </form>
-            <a class="btn btn-dark my-2" href="/products">Вход</a>
         </div>
     </div>
 </nav>
@@ -69,8 +118,33 @@
 
 <main>
 
-    <div class="p-5 mt-2">
-        <div class="container block_back">
+    <div >
+        <div class="container pb-5 pt-3  block_back">
+            <div class="input-group mb-2 pb-4">
+                <input type="text" class="form-control rounded-4"  aria-label="Default" id="name1"   placeholder="Введите наименова товара"  >
+
+
+                <div class="input-group-prepend mr-2">
+                    <span class="input-group-text btn btn-dark" id="inputGroup-sizing-default">Поиск</span>
+                </div>
+
+                <label class="mx-2">Цена:</label>         <input type="text" class="mx-2" aria-label="Default" style="width: 50px;" placeholder="min">
+                <label>x</label>   <input type="text" class="mx-2" aria-label="Default" style="width: 50px;"  placeholder="max">
+
+
+
+                <label class="mx-2">Размер:</label>         <input type="text" class="mx-2" aria-label="Default" style="width: 50px;"  placeholder="100">
+                <label>x</label>   <input type="text" class="mx-2" aria-label="Default" style="width: 50px;" placeholder="100">
+
+
+
+                <label class="mx-2"  >Категория:</label>
+                <select class=" mx-2" style="width: 110px;" placeholder="Категории">
+                    <option value="A" >Вазы</option>
+                    <option value="B" >Шкатулки</option>
+                    <option value="-">Фигурки</option>
+                </select>
+            </div>
 
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 
@@ -109,7 +183,12 @@
         </div>
     </div>
 </main>
+<footer class="footer p-3 d-flex mt-auto justify-content-center bottom-0" >
+    <div class="container text-center text-black">
+        © 2022 Все права защищены.
+    </div>
 
+</footer>
 <script src="/js/modalFormScripts.js"></script>
 <script src="/js/productAjaxScripts.js"></script>
 

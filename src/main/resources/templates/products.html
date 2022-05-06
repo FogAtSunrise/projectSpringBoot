@@ -20,10 +20,10 @@
 
 <nav class="navbar navbar-expand-md navbar-light panel">
     <div class="container-fluid">
-        <a class="navbar-brand" href="/">
+        <a class="navbar-brand" href="/products">
             <img src="img/log3.ico" alt="..." class="img-fluid">
         </a>
-        <a class="navbar-brand link_style_for_main" href="/" id="main_name"> ГУП «Колыванский камнерезный<br/>завод имени И.И. Ползунова»</a>
+        <a class="navbar-brand link_style_for_main" href="/products" id="main_name"> ГУП «Колыванский камнерезный<br/>завод имени И.И. Ползунова»</a>
         <button
                 class="navbar-toggler"
                 type="button"
@@ -43,17 +43,19 @@
             <ul class="navbar-nav me-auto mb-2 mb-md-0">
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Каталог изделий</a>
+                    <a class="nav-link active" href="#">Каталог изделий</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/ListZakaz">Лист заказов</a>
                 </li>
 
             </ul>
-            <form class="d-flex me-2 my-2">
-                <input type="text" class="form-control" aria-label="Default" id="findProductsInput">
 
-            </form>
 
             <form  th:action="@{/logout}" method="post">
-                <input type="submit" value="Выход"/>
+                <input class="btn btn-dark" type="submit" value="Выход"/>
+
+
             </form>
 
         </div>
@@ -68,17 +70,44 @@
 
 <main>
 
-    <div class="p-5 mt-2">
-        <div class="container block_back">
+    <div >
+
+
+        <div class="container pb-5 pt-3 block_back">
+            <div class="input-group mb-2 pb-4">
+                <input type="text" class="form-control rounded-4"  aria-label="Default" id="name1"   placeholder="Введите наименова товара"  >
+
+
+                <div class="input-group-prepend mr-2">
+                    <span class="input-group-text btn btn-dark" id="inputGroup-sizing-default">Поиск</span>
+                </div>
+
+                <label class="mx-2">Цена:</label>         <input type="text" class="mx-2" aria-label="Default" style="width: 50px;" placeholder="min">
+                <label>x</label>   <input type="text" class="mx-2" aria-label="Default" style="width: 50px;"  placeholder="max">
+
+
+
+                <label class="mx-2">Размер:</label>         <input type="text" class="mx-2" aria-label="Default" style="width: 50px;"  placeholder="100">
+                <label>x</label>   <input type="text" class="mx-2" aria-label="Default" style="width: 50px;" placeholder="100">
+
+
+
+                <label class="mx-2"  >Категория:</label>
+                <select class=" mx-2" style="width: 110px;" placeholder="Категории">
+                    <option value="A" >Вазы</option>
+                    <option value="B" >Шкатулки</option>
+                    <option value="-">Фигурки</option>
+                </select>
+            </div>
 
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 
                 <div class="col-6 col-md-5 col-lg-4 col-xl-3" id="add-card">
-                    <div class="card shadow-sm">
+                    <div class="card ">
 
                         <div class="card-body">
                             <div class="d-flex justify-content-between align-items-center">
-                                <button type="button" class="btn btn-sm btn-outline-success"
+                                <button type="button" class="btn btn-sm"
                                         onclick="openForm(modalAddProduct)">
                                     <img src="/img/plus.png" alt="Добавить" class="img-fluid">
 
@@ -97,15 +126,14 @@
                         <div class="card-body">
                             <p class="card-text" th:utext="${product.getName()}"></p>
                             <div class="d-flex justify-content-between align-items-center">
-                                <a th:href="@{/products/{id}(id=${product.getId()})}">
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-dark btn-outline-info">Подробнее</button>
-                                    </div>
+
+
+
+                                <a class="col-5 link_style btn btn-outline-primary btn-dark  border-0 m-1" th:href="@{/products/{id}(id=${product.getId()})}">
+                                   Подробнее
                                 </a>
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-dark btn-product-delete
-                                    btn-outline-danger  " th:id="${product.id}">Удалить</button>
-                                </div>
+                                <a  class="col-5 link_style btn btn-outline-danger btn-dark  border-0 m-1" onclick="openForm(modalDeleteProduct)">Удалить</a>
+
                             </div>
                         </div>
                     </div>
@@ -139,8 +167,15 @@
                             <label for="name">Наименование</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <textarea class="form-control rounded-4" id="category" placeholder="category"
-                                      rows="10" th:field="*{category}"></textarea>
+
+                            <select class=" form-control rounded-4" id="category"  placeholder="category" th:field="*{category}">
+                                <option value="A" >Вазы</option>
+                                <option value="B" >Шкатулки</option>
+                                <option value="-">Фигурки</option>
+                                <option value="1">Кулоны</option>
+                                <option value="ро">Пепельницы</option>
+                            </select>
+
                             <label for="category">Категория</label>
                         </div>
 
@@ -156,9 +191,6 @@
                             <label for="price">Цена</label>
                         </div>
 
-
-
-
                         <div class="form-floating mb-3">
                             <textarea class="form-control rounded-4" id="description" placeholder="desc"
                                       rows="10" th:field="*{description}"></textarea>
@@ -169,11 +201,7 @@
                             <input class="form-control" type="file" id="photo" name="photo"
                                    accept="image/png, image/jpeg">
                         </div>
-
-
-
-
-                        <button class="w-100 mb-2 btn btn-lg rounded-4 btn-success" type="submit">Добавить</button>
+                        <button class="w-100 mb-2 btn btn-lg rounded-4 btn-success" href="/products" type="submit" >Добавить</button>
                     </form>
                 </div>
             </div>
@@ -183,10 +211,19 @@
 
 </main>
 
+
+
+
 <script src="/js/modalFormScripts.js"></script>
 <script src="/js/productAjaxScripts.js"></script>
 
 </body>
+<footer class="footer p-3 d-flex mt-auto justify-content-center bottom-0" >
+    <div class="container text-center text-black">
+        © 2022 Все права защищены.
+    </div>
+
+</footer>
 </html>
 
 

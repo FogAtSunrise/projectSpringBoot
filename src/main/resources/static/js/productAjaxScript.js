@@ -25,8 +25,10 @@ $(document).ready(function () {
             processData: false,
             contentType: false,
         }).done(function (response) {
-            $("#modalAddProduct").hide();
-            showNewProduct(response);
+           // $("#modalAddProduct").hide();
+          //  showNewProduct(response);
+          type: 'GET',
+          url: "/products" + id
         });
     });
 
@@ -72,6 +74,7 @@ $(document).ready(function () {
 
 
     //Отобразить
+    /*
     function showNewProduct(product) {
             let $newCard = $('<div class="col-6 col-md-5 col-lg-4 col-xl-3 product_card">' +
                 '<div class="card shadow-sm">' +
@@ -99,4 +102,4 @@ $(document).ready(function () {
             $($newCard).attr('id', "product_" + product.id);
             $('#add-card').before($newCard);
         }
-});
+});*/

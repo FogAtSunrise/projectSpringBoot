@@ -30,7 +30,7 @@ public class ProductCrudController {
      */
     @PostMapping("/add_product")
     @ResponseBody
-    public ResponseEntity<?> addProduct(@ModelAttribute("productForm") ProductForm productForm) {
+    public  RedirectView addProduct(@ModelAttribute("productForm") ProductForm productForm) {
         log.info("[POST - /add_product]\tEntered addProduct method");
         try {
             productCrudService.save(productForm);
@@ -38,7 +38,10 @@ public class ProductCrudController {
             e.printStackTrace();
         }
         log.info("[POST - /add_product]\tNew product added successfully");
-        return ResponseEntity.ok(productSearchService.findByName(productForm.getName()));
+        //return
+        ResponseEntity.ok(productSearchService.findByName(productForm.getName()));
+        return new RedirectView("/products");
+
     }
 
     /**
